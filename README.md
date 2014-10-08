@@ -21,6 +21,11 @@ $ grunt workon
 $ mocha
 ```
 
+## Development
+```
+$ foreman run node crunch
+```
+
 ## Deploy
 
 ```
