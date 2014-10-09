@@ -16,6 +16,4 @@ webmakerMetrics.updateEngagementMetrics(function (err, res) {
     console.error(err);
     process.exit(0);
   }
-  console.log(res);
-  //process.exit(0);
 });
