@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.error {
+  color: #428BCA;
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+footer {
+  padding-top: 100px;
+}
+
+.terms {
+  color: #AAA;
+}
+
+th {
+  background: #428bca;
+}
+
+
+
+
+
+
+
+
+

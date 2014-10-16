@@ -1,8 +1,17 @@
 {
   "name": "webmaker-metrics",
   "version": "0.0.0",
+  "homepage": "https://github.com/adamlofting/webmaker-metrics",
+  "authors": [
+    "Adam Lofting <contactme@adamlofting.com>"
+  ],
+  "license": "MPL2",
+  "private": true,
   "dependencies": {
-    "modernizr": "~2.6.2"
+    "modernizr": "~2.6.2",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "dynatable": "~0.3.1"
   },
   "devDependencies": {}
 }

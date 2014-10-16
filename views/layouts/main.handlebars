@@ -1,51 +1,62 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<html class="no-js">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Webmaker-metrics</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Webmaker Metrics</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(assets) styles/screen.css -->
-        <link rel="stylesheet" href="styles/screen.css">
-        <!-- endbuild -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{{token}}}">
+        <meta name="persona-email" content="{{{currentUser}}}">
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/bower_components/dynatable/jquery.dynatable.css">
+        <link rel="stylesheet" href="/styles/main.css">
+
     </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <body id="top">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand">Webmaker Metrics</span>
+        </div>
+      </div>
+    </div>
 
-        <header>
-            <a href="#" class="brand"></a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </header>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10">
+          {{{body}}}
+        </div>
+        <div class="col-sm-2">
+          {{#if authorized}}
+            <p class="small text-right">{{{username}}}</p>
+            <button id="logout" class="btn btn-xs btn-warning pull-right">Sign out <span class="glyphicon glyphicon-remove-sign"></span></button><br /><br />
+          {{else}}
+            {{#unless currentUser}}
+            <br />
+            <a id="login" class="btn btn-primary btn-lg pull-right" role="button">Sign in &raquo;</a>
+            {{/unless}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p class="terms"><a href="http://www.mozilla.org/en-US/privacy/" target="_blank">Privacy</a></p>
+        </div>
+    </footer>
 
-        {{{ body }}}
 
-        <footer>
-           Footer Content 
-        </footer>
-
-        <!-- build:js(assets) scripts/scripts.js -->
-        <!-- endbuild -->
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
-
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/dynatable/jquery.dynatable.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://login.persona.org/include.js"></script>
+    <script src="/scripts/main.js"></script>
+    <!-- {{{pageJS}}} -->
+    {{#if pageJS}}
+      <script src="/scripts/{{{pageJS}}}.js"></script>
+    {{/if}}
     </body>
 </html>

@@ -10,7 +10,11 @@
     "mysql": "~2.5.1",
     "async": "~0.9.0",
     "sequelize": "~2.0.0-rc1",
-    "makeapi-client": "~0.5.28"
+    "makeapi-client": "~0.5.28",
+    "express-sslify": "~0.1.0",
+    "helmet": "~0.4.1",
+    "logfmt": "~1.2.0",
+    "express-persona": "~0.1.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
