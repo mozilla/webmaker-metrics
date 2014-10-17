@@ -110,7 +110,7 @@ app.get('/', function (req, res) {
     if (req.session.targetURL) {
       res.redirect(req.session.targetURL);
     } else {
-      res.redirect('/dashboards');
+      res.redirect('/dashboard/rids');
     }
   } else {
     var email = req.session.email;
