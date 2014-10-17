@@ -70,7 +70,7 @@ function restrict(req, res, next) {
 
 // persona
 require('express-persona')(app, {
-  audience: process.env.HOST + ':' + process.env.PORT, // Must match your browser's address bar
+  audience: process.env.HOST, // Must match your browser's address bar
   verifyResponse: function (err, req, res, email) {
     if (util.isValidEmail(email, ['@mozillafoundation.org', '@mozilla.com'])) {
       req.session.authorized = true;

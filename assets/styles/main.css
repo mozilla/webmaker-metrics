@@ -23,7 +23,13 @@ th {
   background: #428bca;
 }
 
-
+th.referrers {
+  width: 310px;
+}
+th.values {
+  width: 30px;
+  text-align: right;
+}
 
 
 
