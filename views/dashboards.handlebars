@@ -1,7 +1,15 @@
 <h1>Dashboards</h1>
 
 {{#if authorized}}
-<!-- nada -->
+
+<hr />
+<h3><a href="/dashboard/product-kpis">Webmaker Product KPI Dashboard &raquo;</a></h3>
+<p>How are we doing against our aquisition and retention targets for 2015?</p>
+<hr />
+<h3><a href="/dashboard/rids">Webmaker Referral ID Data &raquo;</a></h3>
+<p>See which RIDs are driving traffic, which of those bring in new users, and what those users go on to do.</p>
+<hr />
+
 {{else}}
 {{#if currentUser }}
 <p>You need to use your MoFo email: <button id="logout" class="btn btn-xs btn-warning">Sign out</button></p>

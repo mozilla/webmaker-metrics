@@ -60,6 +60,11 @@ app.use(express.static(__dirname + '/assets'));
 
 // middleware to restrict access to internal routes
 function restrict(req, res, next) {
+  // OFFLINE TESTING
+  req.session.email = 'adam@mozilla.org';
+  req.session.authorized = true;
+  // END OFFLINE TESTING
+
   if (req.session.authorized) {
     next();
   } else {
@@ -110,7 +115,7 @@ app.get('/', function (req, res) {
     if (req.session.targetURL) {
       res.redirect(req.session.targetURL);
     } else {
-      res.redirect('/dashboard/rids');
+      res.redirect('/dashboards');
     }
   } else {
     var email = req.session.email;
@@ -149,9 +154,53 @@ app.get('/dashboard/rids', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-rids', null);
 });
 
+app.get('/dashboard/product-kpis', restrict, function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-product-kpis', null);
+});
+
 
 app.get('/api/rids', restrict, function (req, res) {
   reporting.latestRIDs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvs', restrict, function (req, res) {
+  reporting.productUVs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvtoau', restrict, function (req, res) {
+  reporting.productUVtoAU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retention-7day', restrict, function (req, res) {
+  reporting.productRetention7Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retention-30day', restrict, function (req, res) {
+  reporting.productRetention30Day(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});

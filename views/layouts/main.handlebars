@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/bower_components/dynatable/jquery.dynatable.css">
+        <link href='/bower_components/metrics-graphics/css/metricsgraphics.css' rel='stylesheet' type='text/css'>
+
+
         <link rel="stylesheet" href="/styles/main.css">
 
     </head>
@@ -18,7 +21,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <span class="navbar-brand">Webmaker Metrics</span>
+          <span class="navbar-brand"><a href="/">Webmaker Metrics</a></span>
         </div>
       </div>
     </div>
@@ -57,6 +60,8 @@
     <script src="/bower_components/dynatable/jquery.dynatable.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://login.persona.org/include.js"></script>
+    <script src='/bower_components/d3/d3.min.js'></script>
+    <script src='/bower_components/metrics-graphics/js/metricsgraphics.min.js'></script>
     <script src="/scripts/main.js"></script>
     <!-- {{{pageJS}}} -->
     {{#if pageJS}}

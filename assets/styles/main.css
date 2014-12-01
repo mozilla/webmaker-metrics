@@ -31,8 +31,13 @@ th.values {
   text-align: right;
 }
 
+.right {
+  text-align: right;
+}
 
-
+.center {
+  text-align: center;
+}
 
 
 
