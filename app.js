@@ -8,6 +8,9 @@ var enforce = require('express-sslify');
 var helmet = require('helmet');
 var https = require('https');
 var fs = require('fs');
+var ga = require('./lib/googleanalytics');
+var webmakerMetrics = require('./lib/webmaker-metrics.js');
+var auth = require('http-auth');
 
 var app = express();
 
@@ -44,7 +47,8 @@ app.use(function (req, res, next) {
   res.locals.token = req.csrfToken();
   next();
 });
-app.use(helmet.hsts()); // HTTP Strict Transport Security
+var ninetyDaysInMilliseconds = 7776000000;
+app.use(helmet.hsts({ maxAge: ninetyDaysInMilliseconds }));  // HTTP Strict Transport Security
 app.use(helmet.xframe('deny')); // X-Frame-Options
 app.use(helmet.csp(cspPolicy));
 app.use(helmet.xssFilter());
@@ -55,16 +59,21 @@ app.use(express.static(__dirname + '/assets'));
 
 
 /** ================================
+ * BASIC AUTH as an extra layer over GA auth
+ ================================ */
+var basic = auth.basic({
+        realm: "Web."
+    }, function (username, password, callback) { // Custom authentication method.
+        callback(username === process.env.LOCAL_AUTH_USERNAME && password === process.env.LOCAL_AUTH_PASSWORD);
+    }
+);
+
+/** ================================
  * LOGIN
  ================================ */
 
 // middleware to restrict access to internal routes
 function restrict(req, res, next) {
-  // OFFLINE TESTING
-  req.session.email = 'adam@mozilla.org';
-  req.session.authorized = true;
-  // END OFFLINE TESTING
-
   if (req.session.authorized) {
     next();
   } else {
@@ -209,6 +218,52 @@ app.get('/api/product-retention-30day', restrict, function (req, res) {
   });
 });
 
+
+/** ================================
+ * UTILS
+ ================================ */
+
+app.get('/util/crunch7daysProduct', restrict, function (req, res) {
+  webmakerMetrics.updateProductFunnel7Days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.redirect('/dashboards/?crunched7days');
+  });
+});
+
+/** ================================
+ * GA AUTH
+ ================================ */
+
+// GA AUTH
+app.get('/ga/auth', auth.connect(basic), function (req, res) {
+  ga.getAuthURL(function (err, url) {
+    res.redirect(url);
+  });
+});
+
+app.get('/ga/oauth2callback', auth.connect(basic), function (req, res) {
+  var code = req.param('code');
+  if (!code) {
+    res.json({'Error':'Missing authentication code from GA redirect'});
+    return;
+  }
+
+  ga.updateAuthTokens(code, function (err, response) {
+    if (err) {
+      res.json({"Error": err});
+      return;
+    }
+    console.log('Updated Auth Tokens');
+    res.redirect('/ga/done');
+  });
+});
+
+app.get('/ga/done', auth.connect(basic), function (req, res) {
+  res.send('Done<br><a href="/ga/auth/">Again</a>');
+});
 
 /** ================================
  * SERVER
