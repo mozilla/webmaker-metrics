@@ -11,7 +11,11 @@
     "modernizr": "~2.6.2",
     "jquery": "~2.1.1",
     "bootstrap": "~3.2.0",
-    "dynatable": "~0.3.1"
+    "dynatable": "~0.3.1",
+    "makerstrap": "~0.2.7"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "bootstrap": "3.1.1"
+  }
 }

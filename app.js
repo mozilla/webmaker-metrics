@@ -17,7 +17,7 @@ var app = express();
 var cspPolicy = {
   'default-src': ['\'self\'', 'https://login.persona.org'],
   'script-src': ['\'self\'', 'https://login.persona.org'],
-  'style-src': ['\'self\'', '\'unsafe-inline\'']
+  'style-src': ['\'self\'', '\'unsafe-inline\'', 'fonts.googleapis.com', 'netdna.bootstrapcdn.com']
 };
 
 // set up handlebars view engine

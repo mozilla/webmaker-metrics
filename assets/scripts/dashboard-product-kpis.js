@@ -168,11 +168,11 @@ d3.json('/api/product-retention-30day', function(data) {
 // UVtoEU
 d3.json('/api/product-UVtoEU', function(data) {
 
-  var goal = 10;
+  var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target Q4'}];
+  var baselines = []; //[{value:goal, label:'target Q4'}];
 
   data = convert_dates(data, 'date');
   //add a line chart that has a few observations
@@ -198,11 +198,11 @@ d3.json('/api/product-UVtoEU', function(data) {
 // AUtoEU
 d3.json('/api/product-AUtoEU', function(data) {
 
-  var goal = 10;
+  var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target Q4'}];
+  var baselines = []; //[{value:goal, label:'target Q4'}];
 
   data = convert_dates(data, 'date');
   //add a line chart that has a few observations
