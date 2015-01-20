@@ -218,6 +218,26 @@ app.get('/api/product-retention-30day', restrict, function (req, res) {
   });
 });
 
+app.get('/api/product-UVtoEU', restrict, function (req, res) {
+  reporting.productUVtoEU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-AUtoEU', restrict, function (req, res) {
+  reporting.productAUtoEU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
 
 /** ================================
  * UTILS

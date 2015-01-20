@@ -1,4 +1,3 @@
-
 var small = {};
     small.width = 450;
     small.height = 160;
@@ -13,12 +12,41 @@ function yMaxFromDataOrGoal (maxFromData, goal) {
   return goal * 1.1;
 }
 
+Date.prototype.yyyymmdd = function() {
+  var yyyy = this.getFullYear().toString();
+  var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+  var dd  = this.getDate().toString();
+  return yyyy + '-' +(mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
+};
+
+function getMostRecentValue (data) {
+  var latestDateInData = d3.max(data, function(d) { return new Date(d.date); });
+  latestDateInData = latestDateInData.yyyymmdd();
+  var value;
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].date === latestDateInData) {
+      value = data[i].value;
+    }
+  }
+  return value;
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function numberAsPercent(x) {
+  return x.toFixed(2) + '%';
+}
+
+
 // UVs
 d3.json('/api/product-uvs', function(data) {
 
   var goal = 15000;
-  var maxInData = d3.max(data, function(d) { return d.value; });
-  var max_y = yMaxFromDataOrGoal(maxInData, goal);
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target'}];
 
   data = convert_dates(data, 'date');
@@ -38,14 +66,17 @@ d3.json('/api/product-uvs', function(data) {
     baselines: baselines,
     max_y: max_y
   });
+
+  d3.select('#total-uvs').html(numberWithCommas(mostRecentValue));
 });
 
 // UV to AU conversion rate
 d3.json('/api/product-uvtoau', function(data) {
 
   var goal = 5;
-  var maxInData = d3.max(data, function(d) { return d.value; });
-  var max_y = yMaxFromDataOrGoal(maxInData, goal);
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target Q1'}];
 
   data = convert_dates(data, 'date');
@@ -65,6 +96,8 @@ d3.json('/api/product-uvtoau', function(data) {
     baselines: baselines,
     max_y: max_y
   });
+
+  d3.select('#total-uvtoau').html(numberAsPercent(mostRecentValue));
 });
 
 
@@ -73,8 +106,9 @@ d3.json('/api/product-retention-7day', function(data) {
 
   var goalQ2 = 10;
   var goalQ3 = 20;
-  var maxInData = d3.max(data, function(d) { return d.value; });
-  var max_y = yMaxFromDataOrGoal(maxInData, goalQ3);
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goalQ3);
   var baselines = [ {value:goalQ2, label:'target Q2'},
                     {value:goalQ3, label:'target Q3'}];
 
@@ -95,6 +129,8 @@ d3.json('/api/product-retention-7day', function(data) {
     baselines: baselines,
     max_y: max_y
   });
+
+  d3.select('#total-retention-7day').html(numberAsPercent(mostRecentValue));
 });
 
 
@@ -102,8 +138,9 @@ d3.json('/api/product-retention-7day', function(data) {
 d3.json('/api/product-retention-30day', function(data) {
 
   var goal = 10;
-  var maxInData = d3.max(data, function(d) { return d.value; });
-  var max_y = yMaxFromDataOrGoal(maxInData, goal);
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target Q4'}];
 
   data = convert_dates(data, 'date');
@@ -123,4 +160,67 @@ d3.json('/api/product-retention-30day', function(data) {
     baselines: baselines,
     max_y: max_y
   });
+
+  d3.select('#total-retention-30day').html(numberAsPercent(mostRecentValue));
+});
+
+
+// UVtoEU
+d3.json('/api/product-UVtoEU', function(data) {
+
+  var goal = 10;
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var baselines = [{value:goal, label:'target Q4'}];
+
+  data = convert_dates(data, 'date');
+  //add a line chart that has a few observations
+  data_graphic({
+    title: null,
+    data: data,
+    interpolate: 'basic',
+    width: small.width,
+    height: small.height,
+    right: small.right,
+    target: '#graph-UVtoEU',
+    x_accessor: 'date',
+    y_accessor: 'value',
+    area: false,
+    x_axis: false,
+    baselines: baselines,
+    max_y: max_y
+  });
+
+  d3.select('#total-UVtoEU').html(numberAsPercent(mostRecentValue));
+});
+
+// AUtoEU
+d3.json('/api/product-AUtoEU', function(data) {
+
+  var goal = 10;
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var baselines = [{value:goal, label:'target Q4'}];
+
+  data = convert_dates(data, 'date');
+  //add a line chart that has a few observations
+  data_graphic({
+    title: null,
+    data: data,
+    interpolate: 'basic',
+    width: small.width,
+    height: small.height,
+    right: small.right,
+    target: '#graph-AUtoEU',
+    x_accessor: 'date',
+    y_accessor: 'value',
+    area: false,
+    x_axis: false,
+    baselines: baselines,
+    max_y: max_y
+  });
+
+  d3.select('#total-AUtoEU').html(numberAsPercent(mostRecentValue));
 });
