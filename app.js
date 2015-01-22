@@ -257,7 +257,7 @@ app.get('/api/product-AUtoEU', restrict, function (req, res) {
  ================================ */
 
 
-app.get('/api/public/geckoboard/product-uvtonewuser', function (req, res) {
+app.get('/api/public/geckoboard/product-uvtonewuser/line', function (req, res) {
   reporting.productUVtoNewUser(function (err, result) {
     if (err) {
       console.error(err);
@@ -269,7 +269,21 @@ app.get('/api/public/geckoboard/product-uvtonewuser', function (req, res) {
   });
 });
 
-app.get('/api/public/geckoboard/product-retention-7day', function (req, res) {
+app.get('/api/public/geckoboard/product-uvtonewuser/number', function (req, res) {
+  reporting.productUVtoNewUser(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, 'UV to New User', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-7day/line', function (req, res) {
   reporting.productRetention7Day(function (err, result) {
     if (err) {
       console.error(err);
@@ -281,7 +295,21 @@ app.get('/api/public/geckoboard/product-retention-7day', function (req, res) {
   });
 });
 
-app.get('/api/public/geckoboard/product-retention-30day', function (req, res) {
+app.get('/api/public/geckoboard/product-retention-7day/number', function (req, res) {
+  reporting.productRetention7Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, '7 Day Retention Rate', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-30day/line', function (req, res) {
   reporting.productRetention30Day(function (err, result) {
     if (err) {
       console.error(err);
@@ -289,6 +317,20 @@ app.get('/api/public/geckoboard/product-retention-30day', function (req, res) {
     }
     var sorted = util.sortArrayOfObjectsByDate(result, 'date');
     var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-30day/number', function (req, res) {
+  reporting.productRetention30Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, '30 Day Retention Rate', {usingDates: true});
     res.json(transformed);
   });
 });
