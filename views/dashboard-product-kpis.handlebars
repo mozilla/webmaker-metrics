@@ -1,5 +1,11 @@
 <h1>Webmaker Product KPIs</h1>
 
+<div class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Warning:</span>
+  Data in this demo view may be funky until final hosting is in place. It won't update automatically, and this URL is going to change.
+</div>
+
 <hr>
 <div class="row">
   <div class="col-sm-2">
@@ -39,15 +45,15 @@
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>UV to AU</h4>
-    <p>Conversion Rate: Active Users / Unique Visitors</p>
+    <h4>UV to New User</h4>
+    <p>Conversion Rate: New Users / Unique Visitors</p>
   </div>
   <div class="col-sm-2 right">
-    <h1 id="total-uvtoau">loading</h1>
+    <h1 id="total-uvtonewuser">loading</h1>
   </div>
   <div class="col-sm-6">
     <div class='row'>
-      <div class='col-sm-12' id='graph-uvtoau'></div>
+      <div class='col-sm-12' id='graph-uvtonewuser'></div>
     </div>
   </div>
   <div class="col-sm-2 right">
@@ -100,6 +106,25 @@
 <hr>
 <br /><br />
 <h2>Additional Metrics</h2>
+
+<hr>
+<div class="row">
+  <div class="col-sm-2">
+    <h4>UV to AU</h4>
+    <p>Conversion Rate: Active Users / Unique Visitors <small>Includes new and existing users</small></p>
+  </div>
+  <div class="col-sm-2 right">
+    <h1 id="total-uvtoau">loading</h1>
+  </div>
+  <div class="col-sm-6">
+    <div class='row'>
+      <div class='col-sm-12' id='graph-uvtoau'></div>
+    </div>
+  </div>
+  <div class="col-sm-2 right">
+    <h4>N/A</h4>
+  </div>
+</div>
 
 <hr>
 <div class="row">
