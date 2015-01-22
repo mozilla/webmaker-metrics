@@ -195,6 +195,36 @@ d3.json('/api/product-retention-30day', function(data) {
   d3.select('#total-retention-30day').html(numberAsPercent(mostRecentValue));
 });
 
+// 30 Day Retention
+d3.json('/api/product-retention-90day', function(data) {
+
+  var goal = 0;
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = getMostRecentValue(data);
+  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var baselines = []; //[{value:goal, label:'target Q4'}];
+
+  data = convert_dates(data, 'date');
+  //add a line chart that has a few observations
+  data_graphic({
+    title: null,
+    data: data,
+    interpolate: 'basic',
+    width: small.width,
+    height: small.height,
+    right: small.right,
+    target: '#graph-retention-90day',
+    x_accessor: 'date',
+    y_accessor: 'value',
+    area: false,
+    x_axis: false,
+    baselines: baselines,
+    max_y: max_y
+  });
+
+  d3.select('#total-retention-90day').html(numberAsPercent(mostRecentValue));
+});
+
 
 // UVtoEU
 d3.json('/api/product-UVtoEU', function(data) {
