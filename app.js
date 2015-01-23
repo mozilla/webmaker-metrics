@@ -11,6 +11,7 @@ var fs = require('fs');
 var ga = require('./lib/googleanalytics');
 var webmakerMetrics = require('./lib/webmaker-metrics.js');
 var auth = require('http-auth');
+var geckoboardJSON = require('geckoboard-json');
 
 var app = express();
 
@@ -167,6 +168,9 @@ app.get('/dashboard/product-kpis', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-product-kpis', null);
 });
 
+/** ================================
+ * APIS (RESTRICTED)
+ ================================ */
 
 app.get('/api/rids', restrict, function (req, res) {
   reporting.latestRIDs(function (err, result) {
@@ -180,6 +184,16 @@ app.get('/api/rids', restrict, function (req, res) {
 
 app.get('/api/product-uvs', restrict, function (req, res) {
   reporting.productUVs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvtonewuser', restrict, function (req, res) {
+  reporting.productUVtoNewUser(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
@@ -218,6 +232,16 @@ app.get('/api/product-retention-30day', restrict, function (req, res) {
   });
 });
 
+app.get('/api/product-retention-90day', restrict, function (req, res) {
+  reporting.productRetention90Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
 app.get('/api/product-UVtoEU', restrict, function (req, res) {
   reporting.productUVtoEU(function (err, result) {
     if (err) {
@@ -238,6 +262,88 @@ app.get('/api/product-AUtoEU', restrict, function (req, res) {
   });
 });
 
+/** ================================
+ * APIS (PUBLIC)
+ ================================ */
+
+
+app.get('/api/public/geckoboard/product-uvtonewuser/line', function (req, res) {
+  reporting.productUVtoNewUser(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    var sorted = util.sortArrayOfObjectsByDate(result, 'date');
+    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-uvtonewuser/number', function (req, res) {
+  reporting.productUVtoNewUser(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, 'UV to New User', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-7day/line', function (req, res) {
+  reporting.productRetention7Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    var sorted = util.sortArrayOfObjectsByDate(result, 'date');
+    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-7day/number', function (req, res) {
+  reporting.productRetention7Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, '7 Day Retention Rate', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-30day/line', function (req, res) {
+  reporting.productRetention30Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    var sorted = util.sortArrayOfObjectsByDate(result, 'date');
+    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    res.json(transformed);
+  });
+});
+
+app.get('/api/public/geckoboard/product-retention-30day/number', function (req, res) {
+  reporting.productRetention30Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    console.log(result);
+    var mostRecent = util.getMostRecentValue(result, 'date', 'value');
+    var rounded = Math.round(mostRecent * 100) / 100;
+    var transformed = geckoboardJSON.numberAndSecondaryStat(rounded, '30 Day Retention Rate', {usingDates: true});
+    res.json(transformed);
+  });
+});
 
 /** ================================
  * UTILS

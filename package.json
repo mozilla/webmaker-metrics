@@ -16,7 +16,8 @@
     "logfmt": "~1.2.0",
     "express-persona": "~0.1.2",
     "http-auth": "~2.2.4",
-    "googleapis": "~1.0.2"
+    "googleapis": "~1.0.2",
+    "geckoboard-json": "0.0.5"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

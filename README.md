@@ -28,7 +28,7 @@ For daily tracking of 7 day retention rate, we are reporting on the % of users w
 ## Development
 ```
 $ foreman run node crunch
-$ foreman run nodemon app
+$ foreman run nodemon app.js
 ```
 
 ## Notes
