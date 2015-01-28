@@ -25,6 +25,15 @@ Webmaker stores an account creation date, and a last updated date. A user who is
 
 For daily tracking of 7 day retention rate, we are reporting on the % of users who joined 7-14 days prior to the snapshot date who were active (updatedAt) more than 7 days after their account creation. The same applies to 30 day retention, but we look at the users who signed up 30-37 days prior to the snapshot date. This model is consistent assuming daily snapshots.
 
+## Initial setup
+
+* copy sample.env to .env
+* you will need a bunch of credentials - ask Adam / JP or others for these
+* Generate the local HTTPS key and cert as noted below
+* `npm install`
+* `bower install`
+
+
 ## Development
 ```
 $ foreman run node crunch
