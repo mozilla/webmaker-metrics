@@ -9,7 +9,7 @@
     "moment": "~2.8.3",
     "mysql": "~2.5.1",
     "async": "~0.9.0",
-    "sequelize": "~2.0.0-rc1",
+    "sequelize": "~2.0.0-rc8",
     "makeapi-client": "~0.5.28",
     "express-sslify": "~0.1.0",
     "helmet": "~0.4.1",
