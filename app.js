@@ -136,7 +136,7 @@ app.get('/', function (req, res) {
   }
 });
 
-function renderDashboardPage(req, res, viewName, extraTemplateValues) {
+function renderDashboardPage(req, res, viewName) {
   var email = req.session.email;
   var username = util.allBeforeTheAt(email);
   var templateValues = {
@@ -146,26 +146,19 @@ function renderDashboardPage(req, res, viewName, extraTemplateValues) {
     pageJS: viewName,
   };
 
-  // if this page has extraTemplateValues, add these to the object
-  if (extraTemplateValues) {
-    for (var attrname in extraTemplateValues) {
-      templateValues[attrname] = extraTemplateValues[attrname];
-    }
-  }
-
   res.render(viewName, templateValues);
 }
 
 app.get('/dashboards', restrict, function (req, res) {
-  renderDashboardPage(req, res, 'dashboards', null);
+  renderDashboardPage(req, res, 'dashboards');
 });
 
 app.get('/dashboard/rids', restrict, function (req, res) {
-  renderDashboardPage(req, res, 'dashboard-rids', null);
+  renderDashboardPage(req, res, 'dashboard-rids');
 });
 
 app.get('/dashboard/product-kpis', restrict, function (req, res) {
-  renderDashboardPage(req, res, 'dashboard-product-kpis', null);
+  renderDashboardPage(req, res, 'dashboard-product-kpis');
 });
 
 /** ================================
