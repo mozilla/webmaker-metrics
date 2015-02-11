@@ -1,0 +1,12 @@
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_badges TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_event_host_ids TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_makes TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_referrers TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_referrers_and_badges TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_referrers_and_events TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_referrers_and_makes TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_retention TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_teaching TO {{APPUSERNAME}}@'%';
+GRANT SELECT ON mofointegration.vw_wm_metrics_users TO {{APPUSERNAME}}@'%';
+FLUSH privileges;

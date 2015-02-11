@@ -2,6 +2,7 @@ node_modules
 .tmp
 .sass-cache
 .env
+.DS_Store
 
 config/key.pem
 config/cert.pem
