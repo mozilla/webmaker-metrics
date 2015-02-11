@@ -31,6 +31,12 @@ function getMostRecentValue (data) {
   return value;
 }
 
+function getMostRecentDate (data) {
+  var latestDateInData = d3.max(data, function(d) { return new Date(d.date); });
+  latestDateInData = latestDateInData.yyyymmdd();
+  return latestDateInData;
+}
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -68,6 +74,7 @@ d3.json('/api/product-uvs', function(data) {
   });
 
   d3.select('#total-uvs').html(numberWithCommas(mostRecentValue));
+  d3.select('#latest-date').text(getMostRecentDate(data));
 });
 
 // UV to AU conversion rate
