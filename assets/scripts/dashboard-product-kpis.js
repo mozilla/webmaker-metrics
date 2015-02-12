@@ -49,7 +49,7 @@ function numberAsPercent(x) {
 // UVs
 d3.json('/api/product-uvs', function(data) {
 
-  var goal = 15000;
+  var goal = 19750;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goal);
