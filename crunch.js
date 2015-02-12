@@ -24,6 +24,7 @@ var appmaker = require('./lib/appmaker_temp.js');
 async.series({
 
     appmaker: function(callback){
+
         // UPDATE APPMAKER SCRAPER
         // Appmaker makers are in a MongoDB.
         // This hack polls the MakeAPI to copy into MySQL the create time of each make
@@ -33,21 +34,24 @@ async.series({
             console.error(err);
           }
           console.log('Finished Running appmaker.refreshStats()');
-          callback(null);
+          return callback(null);
         });
     },
 
     productKPIs: function(callback){
+
         webmakerMetrics.updateWebmakerProductFunnel(function (err, res) {
           'use strict';
           if (err) {
             console.error(err);
           }
           console.log('Finished Running webmakerMetrics.updateWebmakerProductFunnel()');
+          return callback(null);
         });
     }
 },
 function(err, results) {
+  console.log('bazra');
     console.log('Finished Running crunch.js');
 });
 
