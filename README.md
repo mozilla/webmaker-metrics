@@ -74,3 +74,17 @@ Save the key and the cert here:
 /config/key.pem
 /config/cert.pem
 ```
+
+## Public URLs for Geckoboard
+
+### UV to New User
+* https://metrics.webmaker.org/api/public/geckoboard/product-uvtonewuser/number
+* https://metrics.webmaker.org/api/public/geckoboard/product-uvtonewuser/line
+
+### Retention 7 Day
+* https://metrics.webmaker.org/api/public/geckoboard/product-retention-7day/number
+* https://metrics.webmaker.org/api/public/geckoboard/product-retention-7day/line
+
+### Retention 30 Day
+* https://metrics.webmaker.org/api/public/geckoboard/product-retention-30day/number
+* https://metrics.webmaker.org/api/public/geckoboard/product-retention-30day/line

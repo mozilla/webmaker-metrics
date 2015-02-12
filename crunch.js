@@ -19,14 +19,12 @@ var webmakerMetrics = require('./lib/webmaker-metrics.js');
 //   }
 // });
 
-webmakerMetrics.updateProductFunnel7Days(function (err, res) {
+webmakerMetrics.updateWebmakerProductFunnel(function (err, res) {
   'use strict';
   if (err) {
     console.error(err);
-    process.exit(0);
   }
-  console.log('Updated');
-  process.exit(0);
+  console.log('Finished Running updateWebmakerProductFunnel()');
 });
 
 // // UPDATE APPMAKER
