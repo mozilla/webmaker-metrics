@@ -1,5 +1,6 @@
+var async = require('async');
 var webmakerMetrics = require('./lib/webmaker-metrics.js');
-// var appmaker = require('./lib/appmaker_temp.js');
+var appmaker = require('./lib/appmaker_temp.js');
 
 // webmakerMetrics.updateRIDMetrics(function (err, res) {
 //   'use strict';
@@ -19,19 +20,39 @@ var webmakerMetrics = require('./lib/webmaker-metrics.js');
 //   }
 // });
 
-webmakerMetrics.updateWebmakerProductFunnel(function (err, res) {
-  'use strict';
-  if (err) {
-    console.error(err);
-  }
-  console.log('Finished Running updateWebmakerProductFunnel()');
+
+async.series({
+
+    appmaker: function(callback){
+        // UPDATE APPMAKER SCRAPER
+        // Appmaker makers are in a MongoDB.
+        // This hack polls the MakeAPI to copy into MySQL the create time of each make
+        appmaker.refreshStats(function (err) {
+          'use strict';
+          if (err) {
+            console.error(err);
+          }
+          console.log('Finished Running appmaker.refreshStats()');
+          callback(null);
+        });
+    },
+
+    productKPIs: function(callback){
+        webmakerMetrics.updateWebmakerProductFunnel(function (err, res) {
+          'use strict';
+          if (err) {
+            console.error(err);
+          }
+          console.log('Finished Running webmakerMetrics.updateWebmakerProductFunnel()');
+        });
+    }
+},
+function(err, results) {
+    console.log('Finished Running crunch.js');
 });
 
-// // UPDATE APPMAKER
-// appmaker.refreshStats(function (err) {
-//   'use strict';
-//   if (err) {
-//     console.error(err);
-//     process.exit(0);
-//   }
-// });
+
+
+
+
+
