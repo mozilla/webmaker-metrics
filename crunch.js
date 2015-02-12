@@ -51,7 +51,6 @@ async.series({
     }
 },
 function(err, results) {
-  console.log('bazra');
     console.log('Finished Running crunch.js');
 });
 
