@@ -267,7 +267,7 @@ app.get('/api/public/geckoboard/product-uvtonewuser/line', function (req, res) {
       return res.status(500).json({status: 'Internal Server Error'});
     }
     var sorted = util.sortArrayOfObjectsByDate(result, 'date');
-    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    var transformed = geckoboardJSON.highChartLineChart(sorted, 'value', 'date', {usingDates: true});
     res.json(transformed);
   });
 });
@@ -293,7 +293,7 @@ app.get('/api/public/geckoboard/product-retention-7day/line', function (req, res
       return res.status(500).json({status: 'Internal Server Error'});
     }
     var sorted = util.sortArrayOfObjectsByDate(result, 'date');
-    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    var transformed = geckoboardJSON.highChartLineChart(sorted, 'value', 'date', {usingDates: true});
     res.json(transformed);
   });
 });
@@ -319,7 +319,7 @@ app.get('/api/public/geckoboard/product-retention-30day/line', function (req, re
       return res.status(500).json({status: 'Internal Server Error'});
     }
     var sorted = util.sortArrayOfObjectsByDate(result, 'date');
-    var transformed = geckoboardJSON.lineChart(sorted, 'value', 'date', {usingDates: true});
+    var transformed = geckoboardJSON.highChartLineChart(sorted, 'value', 'date', {usingDates: true});
     res.json(transformed);
   });
 });
