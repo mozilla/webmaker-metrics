@@ -161,6 +161,10 @@ app.get('/dashboard/product-kpis', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-product-kpis');
 });
 
+app.get('/dashboard/email', restrict, function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-email');
+});
+
 /** ================================
  * APIS (RESTRICTED)
  ================================ */
@@ -247,6 +251,46 @@ app.get('/api/product-UVtoEU', restrict, function (req, res) {
 
 app.get('/api/product-AUtoEU', restrict, function (req, res) {
   reporting.productAUtoEU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-1day', restrict, function (req, res) {
+  reporting.emailOptinRate1day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optins-1day', restrict, function (req, res) {
+  reporting.emailOptins1day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-7days', restrict, function (req, res) {
+  reporting.emailOptinRate7days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-30days', restrict, function (req, res) {
+  reporting.emailOptinRate30days(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
@@ -348,7 +392,17 @@ app.get('/util/crunch7daysProduct', restrict, function (req, res) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
     }
-    res.redirect('/dashboards/?crunched7days');
+    res.redirect('/dashboards/?crunched7daysProduct');
+  });
+});
+
+app.get('/util/crunch7daysEmail', restrict, function (req, res) {
+  webmakerMetrics.updateEmailOptins7Days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.redirect('/dashboards/?crunched7daysEmail');
   });
 });
 
