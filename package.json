@@ -17,7 +17,9 @@
     "express-persona": "~0.1.2",
     "http-auth": "~2.2.4",
     "googleapis": "~1.0.2",
-    "geckoboard-json": "0.0.8"
+    "geckoboard-json": "0.0.8",
+    "nomnom": "~1.8.1",
+    "clone": "~1.0.0"
   },
   "devDependencies": {
     "gulp": "~3.8.11",

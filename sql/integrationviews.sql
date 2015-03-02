@@ -186,6 +186,7 @@ CREATE VIEW `vw_wm_metrics_users` AS
          `wl_Users`.`updatedAt` AS `updatedAt`,
          `wl_Users`.`lastLoggedIn` AS `lastLoggedIn`,
          `wl_Users`.`isSuperMentor` AS `isSuperMentor`,
-         `wl_Users`.`isMentor` AS `isMentor`
+         `wl_Users`.`isMentor` AS `isMentor`,
+         `wl_Users`.`sendEngagements` AS `sendEngagements`
   FROM `wl_Users`;
 
