@@ -12,6 +12,8 @@ var ga = require('./lib/googleanalytics');
 var webmakerMetrics = require('./lib/webmaker-metrics.js');
 var auth = require('http-auth');
 var geckoboardJSON = require('geckoboard-json');
+var moment = require('moment');
+var db = require('./lib/models');
 
 var app = express();
 
@@ -165,6 +167,27 @@ app.get('/dashboard/email', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-email');
 });
 
+app.get('/dashboard/learning-networks', restrict, function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-learning-networks');
+});
+
+app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
+  var snapshotDate = moment().format('YYYY-MM-DD');
+  var snapshot = {
+    snapshotDate: snapshotDate,
+    people: req.query.inputPeople,
+    cities: req.query.inputCities,
+    clubs: req.query.inputClubs,
+    hiveCities: req.query.inputHiveCities,
+    loggedBy: req.session.email
+  };
+  db.LearningNetworkSnapshot.upsert(snapshot)
+    .then(function () {
+      res.redirect('/dashboard/learning-networks?latestNumbersAdded');
+    }
+  );
+});
+
 /** ================================
  * APIS (RESTRICTED)
  ================================ */
@@ -298,6 +321,48 @@ app.get('/api/email-optin-30days', restrict, function (req, res) {
     res.json(result);
   });
 });
+
+app.get('/api/learning-network-cities', restrict, function (req, res) {
+  reporting.learningNetworkCities(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-people', restrict, function (req, res) {
+  reporting.learningNetworkPeople(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-hive-cities', restrict, function (req, res) {
+  reporting.learningNetworkHiveCities(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-clubs', restrict, function (req, res) {
+  reporting.learningNetworkClubs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+
 
 /** ================================
  * APIS (PUBLIC)
