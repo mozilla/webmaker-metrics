@@ -26,6 +26,11 @@ th {
 th.referrers {
   width: 310px;
 }
+
+th.countries {
+  width: 200px;
+}
+
 th.values {
   width: 30px;
   text-align: right;

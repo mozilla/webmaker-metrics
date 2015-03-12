@@ -10,6 +10,7 @@ var https = require('https');
 var fs = require('fs');
 var ga = require('./lib/googleanalytics');
 var webmakerMetrics = require('./lib/webmaker-metrics.js');
+var countryData = require('./lib/country-data.js');
 var auth = require('http-auth');
 var geckoboardJSON = require('geckoboard-json');
 var moment = require('moment');
@@ -167,6 +168,10 @@ app.get('/dashboard/email', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-email');
 });
 
+app.get('/dashboard/country', restrict, function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-country');
+});
+
 app.get('/dashboard/learning-networks', restrict, function (req, res) {
   renderDashboardPage(req, res, 'dashboard-learning-networks');
 });
@@ -194,6 +199,26 @@ app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
 
 app.get('/api/rids', restrict, function (req, res) {
   reporting.latestRIDs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/country', restrict, function (req, res) {
+  reporting.latestCountryData(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/target-countries', restrict, function (req, res) {
+  reporting.targetCountries(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
@@ -468,6 +493,16 @@ app.get('/util/crunch7daysEmail', restrict, function (req, res) {
       return res.status(500).json({status: 'Internal Server Error'});
     }
     res.redirect('/dashboards/?crunched7daysEmail');
+  });
+});
+
+app.get('/util/backdateCountryData', restrict, function (req, res) {
+  countryData.backdataCountryData(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.redirect('/dashboards/?backdatedCountryData');
   });
 });
 
