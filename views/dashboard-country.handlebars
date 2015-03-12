@@ -1,0 +1,44 @@
+<h1>Country Data</h1>
+<h3>AKA: Where is the heat?</h3>
+
+<div class="alert alert-info" role="alert">
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+  <span class="sr-only">About:</span>
+  This is a look at Webmaker usage by country, normalized against the population of internet users in that country.
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/List_of_countries_by_number_of_Internet_users" target="_blank">Internet usage data</a> is from 2012.</li>
+    <li>This looks at traffic to webmaker.org and the tools (but not the mobile app yet)
+    <li>This only shows countries with more than 500 UVs in the last 30 days</li>
+  </ul>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="legend"></div>
+    <div style="width:100%;" id='graph-target-countries'></div>
+  </div>
+  <div class="col-sm-4 well">
+    <p>Notes</p>
+    <ul>
+      <li>UK added as a comparator of an existing higher market penetration, not because it's part of current strategy.</li>
+      <li>The graph can only hold 5 lines currently.</li>
+      <li>These are small numbers, even if we use them to fill the graph.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <table id="country-table" class="table table-striped">
+    <thead>
+      <th class="countries" data-dynatable-column="country">Country</th>
+      <th class="values" data-dynatable-column="UVsToInternetUsers">"Heat" UVs to Internet Users</th>
+      <th class="values" data-dynatable-column="UVs30days">UVs 30 Days</th>
+      <th class="values" data-dynatable-column="InternetUsers">Internet Users</th>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+</div>

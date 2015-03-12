@@ -1,6 +1,7 @@
 var async = require('async');
 var webmakerMetrics = require('./lib/webmaker-metrics.js');
 var appmaker = require('./lib/appmaker_temp.js');
+var countryData = require('./lib/country-data.js');
 var opts = require("nomnom").parse();
 
 // webmakerMetrics.updateRIDMetrics(function (err, res) {
@@ -70,6 +71,17 @@ function emailOptins(callback){
   });
 }
 
+function updateCountry(callback){
+  countryData.updateCountryData(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running countryData.updateCountryData()');
+    return callback(null);
+  });
+}
+
 /**
  * CRUNCH LOGIC
  */
@@ -99,6 +111,12 @@ if (opts[0]) {
     });
   }
 
+  if (toRun === 'updateCountry') {
+    updateCountry(function (err) {
+      console.log('Ran updateCountry');
+    });
+  }
+
 
 } else {
   // Run the whole suite
@@ -106,7 +124,8 @@ if (opts[0]) {
   async.series({
     appmaker: appmaker,
     productKPIs: productKPIs,
-    emailOptins: emailOptins
+    emailOptins: emailOptins,
+    updateCountry: updateCountry
   },
   function(err, results) {
       console.log('Finished running crunch.js');
