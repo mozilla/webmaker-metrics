@@ -1,3 +1,11 @@
+// cachekill util
+var currentdate = new Date();
+var cacheKill = '?ck='
+                + currentdate.getFullYear()
+                + currentdate.getMonth()
+                + currentdate.getDay()
+                + currentdate.getHours();
+
 /*
  GRAPH
  */
@@ -7,7 +15,7 @@ var torso = {};
     torso.height = 200;
     torso.right = 20;
 
-d3.json('/api/target-countries', function(data) {
+d3.json('/api/target-countries'+cacheKill, function(data) {
 
   data = convert_dates(data, 'date');
   //add a line chart that has a few observations
@@ -72,7 +80,7 @@ var mytable;
 
 // Populate the table
 $.ajax({
-  url: '/api/country',
+  url: '/api/country'+cacheKill,
   success: function(data){
     // link up the table
     mytable = $('#country-table').dynatable({

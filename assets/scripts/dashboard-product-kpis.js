@@ -1,3 +1,11 @@
+// cachekill util
+var currentdate = new Date();
+var cacheKill = '?ck='
+                + currentdate.getFullYear()
+                + currentdate.getMonth()
+                + currentdate.getDay()
+                + currentdate.getHours();
+
 var small = {};
     small.width = 450;
     small.height = 160;
@@ -47,7 +55,7 @@ function numberAsPercent(x) {
 
 
 // UVs
-d3.json('/api/product-uvs', function(data) {
+d3.json('/api/product-uvs'+cacheKill, function(data) {
 
   var goal = 19750;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -78,7 +86,7 @@ d3.json('/api/product-uvs', function(data) {
 });
 
 // UV to AU conversion rate
-d3.json('/api/product-uvtoau', function(data) {
+d3.json('/api/product-uvtoau'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -109,7 +117,7 @@ d3.json('/api/product-uvtoau', function(data) {
 
 
 // UV to New User conversion rate
-d3.json('/api/product-uvtonewuser', function(data) {
+d3.json('/api/product-uvtonewuser'+cacheKill, function(data) {
 
   var goal = 5;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -140,7 +148,7 @@ d3.json('/api/product-uvtonewuser', function(data) {
 
 
 // 7 day retention
-d3.json('/api/product-retention-7day', function(data) {
+d3.json('/api/product-retention-7day'+cacheKill, function(data) {
 
   var goalQ2 = 10;
   var goalQ3 = 20;
@@ -173,7 +181,7 @@ d3.json('/api/product-retention-7day', function(data) {
 
 
 // 30 Day Retention
-d3.json('/api/product-retention-30day', function(data) {
+d3.json('/api/product-retention-30day'+cacheKill, function(data) {
 
   var goal = 10;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -203,7 +211,7 @@ d3.json('/api/product-retention-30day', function(data) {
 });
 
 // 30 Day Retention
-d3.json('/api/product-retention-90day', function(data) {
+d3.json('/api/product-retention-90day'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -234,7 +242,7 @@ d3.json('/api/product-retention-90day', function(data) {
 
 
 // UVtoEU
-d3.json('/api/product-UVtoEU', function(data) {
+d3.json('/api/product-UVtoEU'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -264,7 +272,7 @@ d3.json('/api/product-UVtoEU', function(data) {
 });
 
 // AUtoEU
-d3.json('/api/product-AUtoEU', function(data) {
+d3.json('/api/product-AUtoEU'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });

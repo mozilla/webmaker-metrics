@@ -1,3 +1,11 @@
+// cachekill util
+var currentdate = new Date();
+var cacheKill = '?ck='
+                + currentdate.getFullYear()
+                + currentdate.getMonth()
+                + currentdate.getDay()
+                + currentdate.getHours();
+
 var small = {};
     small.width = 450;
     small.height = 200;
@@ -49,7 +57,7 @@ var startOf2015 = new Date(2015,01,01);
 var endOf2015 = new Date(2015,12,31);
 
 // cities
-d3.json('/api/learning-network-cities', function(data) {
+d3.json('/api/learning-network-cities'+cacheKill, function(data) {
 
   var goal = 500;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -83,7 +91,7 @@ d3.json('/api/learning-network-cities', function(data) {
 });
 
 // People
-d3.json('/api/learning-network-people', function(data) {
+d3.json('/api/learning-network-people'+cacheKill, function(data) {
 
   var goal = 4000;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -115,7 +123,7 @@ d3.json('/api/learning-network-people', function(data) {
 });
 
 // Hive Cities
-d3.json('/api/learning-network-hive-cities', function(data) {
+d3.json('/api/learning-network-hive-cities'+cacheKill, function(data) {
 
   var goal = 10;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -147,7 +155,7 @@ d3.json('/api/learning-network-hive-cities', function(data) {
 });
 
 // Clubs
-d3.json('/api/learning-network-clubs', function(data) {
+d3.json('/api/learning-network-clubs'+cacheKill, function(data) {
 
   var goal = 600;
   var maxValue = d3.max(data, function(d) { return d.value; });

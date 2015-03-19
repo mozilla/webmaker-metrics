@@ -1,3 +1,11 @@
+// cachekill util
+var currentdate = new Date();
+var cacheKill = '?ck='
+                + currentdate.getFullYear()
+                + currentdate.getMonth()
+                + currentdate.getDay()
+                + currentdate.getHours();
+
 var small = {};
     small.width = 450;
     small.height = 160;
@@ -46,7 +54,7 @@ function numberAsPercent(x) {
 }
 
 // 1 day opt-in rate
-d3.json('/api/email-optins-1day', function(data) {
+d3.json('/api/email-optins-1day'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -77,7 +85,7 @@ d3.json('/api/email-optins-1day', function(data) {
 });
 
 // 1 day opt-in rate
-d3.json('/api/email-optin-1day', function(data) {
+d3.json('/api/email-optin-1day'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -107,7 +115,7 @@ d3.json('/api/email-optin-1day', function(data) {
 });
 
 // 30 day opt-in rate
-d3.json('/api/email-optin-30days', function(data) {
+d3.json('/api/email-optin-30days'+cacheKill, function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
