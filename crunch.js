@@ -82,6 +82,17 @@ function updateCountry(callback){
   });
 }
 
+function backdateCountry(callback){
+  countryData.backdataCountryData(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running countryData.backdataCountryData()');
+    return callback(null);
+  });
+}
+
 /**
  * CRUNCH LOGIC
  */
@@ -114,6 +125,12 @@ if (opts[0]) {
   if (toRun === 'updateCountry') {
     updateCountry(function (err) {
       console.log('Ran updateCountry');
+    });
+  }
+
+  if (toRun === 'backdateCountry') {
+    backdateCountry(function (err) {
+      console.log('Ran backdateCountry');
     });
   }
 
