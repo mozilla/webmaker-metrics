@@ -50,6 +50,7 @@ function numberWithCommas(x) {
 }
 
 function numberAsPercent(x) {
+  x = x * 100;
   return x.toFixed(2) + '%';
 }
 
@@ -109,6 +110,7 @@ d3.json('/api/product-uvtoau'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -119,7 +121,7 @@ d3.json('/api/product-uvtoau'+cacheKill, function(data) {
 // UV to New User conversion rate
 d3.json('/api/product-uvtonewuser'+cacheKill, function(data) {
 
-  var goal = 5;
+  var goal = 0.05;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goal);
@@ -140,6 +142,7 @@ d3.json('/api/product-uvtonewuser'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -150,8 +153,8 @@ d3.json('/api/product-uvtonewuser'+cacheKill, function(data) {
 // 7 day retention
 d3.json('/api/product-retention-7day'+cacheKill, function(data) {
 
-  var goalQ2 = 10;
-  var goalQ3 = 20;
+  var goalQ2 = 0.1;
+  var goalQ3 = 0.2;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goalQ3);
@@ -173,6 +176,7 @@ d3.json('/api/product-retention-7day'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -183,7 +187,7 @@ d3.json('/api/product-retention-7day'+cacheKill, function(data) {
 // 30 Day Retention
 d3.json('/api/product-retention-30day'+cacheKill, function(data) {
 
-  var goal = 10;
+  var goal = 0.1;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = getMostRecentValue(data);
   var max_y = yMaxFromDataOrGoal(maxValue, goal);
@@ -204,6 +208,7 @@ d3.json('/api/product-retention-30day'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -234,6 +239,7 @@ d3.json('/api/product-retention-90day'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -265,6 +271,7 @@ d3.json('/api/product-UVtoEU'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -295,6 +302,7 @@ d3.json('/api/product-AUtoEU'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 

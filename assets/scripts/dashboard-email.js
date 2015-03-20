@@ -20,6 +20,11 @@ function yMaxFromDataOrGoal (maxFromData, goal) {
   return goal * 1.1;
 }
 
+function numberAsPercent(x) {
+  x = x * 100;
+  return x.toFixed(1) + '%';
+}
+
 Date.prototype.yyyymmdd = function() {
   var yyyy = this.getFullYear().toString();
   var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
@@ -49,9 +54,6 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function numberAsPercent(x) {
-  return x.toFixed(2) + '%';
-}
 
 // 1 day opt-in rate
 d3.json('/api/email-optins-1day'+cacheKill, function(data) {
@@ -108,6 +110,7 @@ d3.json('/api/email-optin-1day'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 
@@ -138,6 +141,7 @@ d3.json('/api/email-optin-30days'+cacheKill, function(data) {
     area: false,
     x_axis: false,
     baselines: baselines,
+    format: 'Percentage',
     max_y: max_y
   });
 

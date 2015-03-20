@@ -93,6 +93,17 @@ function backdateCountry(callback){
   });
 }
 
+function backdateProduct(callback){
+  webmakerMetrics.updateProductFunnel7Days(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.updateProductFunnel7Days()');
+    return callback(null);
+  });
+}
+
 /**
  * CRUNCH LOGIC
  */
@@ -131,6 +142,12 @@ if (opts[0]) {
   if (toRun === 'backdateCountry') {
     backdateCountry(function (err) {
       console.log('Ran backdateCountry');
+    });
+  }
+
+  if (toRun === 'backdateProduct') {
+    backdateProduct(function (err) {
+      console.log('Ran backdateProduct');
     });
   }
 
