@@ -1,11 +1,4 @@
 
-function formatNumberCell(x) {
-  // add comma for thousand seperator
-  x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return '<span class="pull-right">' + x + '</span>';
-}
-
-
 var mytable;
 
 // Populate the table
@@ -28,34 +21,34 @@ $.ajax({
       },
       writers: {
         'usersNew': function (record) {
-          return formatNumberCell(record.usersNew);
+          return util.formatNumberCell(record.usersNew);
         },
         'usersExisting': function (record) {
-          return formatNumberCell(record.usersExisting);
+          return util.formatNumberCell(record.usersExisting);
         },
         'makersNew': function (record) {
-          return formatNumberCell(record.makersNew);
+          return util.formatNumberCell(record.makersNew);
         },
         'mvcBadgeNew': function (record) {
-          return formatNumberCell(record.mvcBadgeNew);
+          return util.formatNumberCell(record.mvcBadgeNew);
         },
         'mvcBadgeExisting': function (record) {
-          return formatNumberCell(record.mvcBadgeExisting);
+          return util.formatNumberCell(record.mvcBadgeExisting);
         },
         'eventHostsNew': function (record) {
-          return formatNumberCell(record.eventHostsNew);
+          return util.formatNumberCell(record.eventHostsNew);
         },
         'mentorsNew': function (record) {
-          return formatNumberCell(record.mentorsNew);
+          return util.formatNumberCell(record.mentorsNew);
         },
         'mentorsExisting': function (record) {
-          return formatNumberCell(record.mentorsExisting);
+          return util.formatNumberCell(record.mentorsExisting);
         },
         'superMentorsNew': function (record) {
-          return formatNumberCell(record.superMentorsNew);
+          return util.formatNumberCell(record.superMentorsNew);
         },
         'superMentorsExisting': function (record) {
-          return formatNumberCell(record.superMentorsExisting);
+          return util.formatNumberCell(record.superMentorsExisting);
         },
       }
     }).data(mytable);

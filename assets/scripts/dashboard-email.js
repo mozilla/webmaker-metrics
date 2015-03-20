@@ -1,11 +1,3 @@
-// cachekill util
-var currentdate = new Date();
-var cacheKill = '?ck='
-                + currentdate.getFullYear()
-                + currentdate.getMonth()
-                + currentdate.getDay()
-                + currentdate.getHours();
-
 var small = {};
     small.width = 450;
     small.height = 160;
@@ -13,55 +5,15 @@ var small = {};
     small.right = 20;
     small.top = 20;
 
-function yMaxFromDataOrGoal (maxFromData, goal) {
-  if (maxFromData >= goal) {
-    return maxFromData * 1.1;
-  }
-  return goal * 1.1;
-}
-
-function numberAsPercent(x) {
-  x = x * 100;
-  return x.toFixed(1) + '%';
-}
-
-Date.prototype.yyyymmdd = function() {
-  var yyyy = this.getFullYear().toString();
-  var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
-  var dd  = this.getDate().toString();
-  return yyyy + '-' +(mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
-};
-
-function getMostRecentValue (data) {
-  var latestDateInData = d3.max(data, function(d) { return new Date(d.date); });
-  latestDateInData = latestDateInData.yyyymmdd();
-  var value;
-  for (var i = 0; i < data.length; i++) {
-    if (data[i].date === latestDateInData) {
-      value = data[i].value;
-    }
-  }
-  return value;
-}
-
-function getMostRecentDate (data) {
-  var latestDateInData = d3.max(data, function(d) { return new Date(d.date); });
-  latestDateInData = latestDateInData.yyyymmdd();
-  return latestDateInData;
-}
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 
 // 1 day opt-in rate
-d3.json('/api/email-optins-1day'+cacheKill, function(data) {
+d3.json('/api/email-optins-1day' + util.cacheKill(), function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
-  var mostRecentValue = getMostRecentValue(data);
-  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var mostRecentValue = util.getMostRecentValue(data);
+  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
   data = convert_dates(data, 'date');
@@ -83,16 +35,17 @@ d3.json('/api/email-optins-1day'+cacheKill, function(data) {
   });
 
   d3.select('#total-optins-1day').html(mostRecentValue);
-  d3.select('#latest-date').text(getMostRecentDate(data));
+  d3.select('#latest-date').text(util.getMostRecentDate(data));
 });
 
+
 // 1 day opt-in rate
-d3.json('/api/email-optin-1day'+cacheKill, function(data) {
+d3.json('/api/email-optin-1day' + util.cacheKill(), function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
-  var mostRecentValue = getMostRecentValue(data);
-  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var mostRecentValue = util.getMostRecentValue(data);
+  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
   data = convert_dates(data, 'date');
@@ -114,16 +67,16 @@ d3.json('/api/email-optin-1day'+cacheKill, function(data) {
     max_y: max_y
   });
 
-  d3.select('#total-optin-1day').html(numberAsPercent(mostRecentValue));
+  d3.select('#total-optin-1day').html(util.numberAsPercent(mostRecentValue, 1));
 });
 
 // 30 day opt-in rate
-d3.json('/api/email-optin-30days'+cacheKill, function(data) {
+d3.json('/api/email-optin-30days' + util.cacheKill(), function(data) {
 
   var goal = 0;
   var maxValue = d3.max(data, function(d) { return d.value; });
-  var mostRecentValue = getMostRecentValue(data);
-  var max_y = yMaxFromDataOrGoal(maxValue, goal);
+  var mostRecentValue = util.getMostRecentValue(data);
+  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
   data = convert_dates(data, 'date');
@@ -145,6 +98,6 @@ d3.json('/api/email-optin-30days'+cacheKill, function(data) {
     max_y: max_y
   });
 
-  d3.select('#total-optin-30days').html(numberAsPercent(mostRecentValue));
+  d3.select('#total-optin-30days').html(util.numberAsPercent(mostRecentValue, 1));
 });
 
