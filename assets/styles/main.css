@@ -36,8 +36,10 @@ th.values {
   text-align: right;
 }
 
-.right {
-  text-align: right;
+@media (min-width: 768px) {
+  .right {
+    text-align: right;
+  }
 }
 
 .center {
