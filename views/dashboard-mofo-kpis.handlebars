@@ -19,7 +19,7 @@
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>Cities</h4>
+    <h4>Learning Network Cities</h4>
     <p>(Active)</p>
   </div>
   <div class="col-sm-2 right">
@@ -39,7 +39,7 @@
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>People</h4>
+    <h4>People (Webmaker Users + TBC)</h4>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-people">loading</h1>
@@ -50,88 +50,10 @@
     </div>
   </div>
   <div class="col-sm-2 right">
-    <h1>4,000</h1>
+    <h1>250,000</h1>
     <p>End of Q4</p>
   </div>
 </div>
 
-<hr>
-<div class="row">
-  <div class="col-sm-2">
-    <h4>Hive Cities</h4>
-  </div>
-  <div class="col-sm-2 right">
-    <h1 id="total-hive-cities">loading</h1>
-  </div>
-  <div class="col-sm-6">
-    <div class='row'>
-      <div class='col-sm-12' id='graph-hive-cities'></div>
-    </div>
-  </div>
-  <div class="col-sm-2 right">
-    <h1>10</h1>
-    <p>End of Q4</p>
-  </div>
-</div>
 
-<hr>
-<div class="row">
-  <div class="col-sm-2">
-    <h4>Clubs</h4>
-  </div>
-  <div class="col-sm-2 right">
-    <h1 id="total-clubs">loading</h1>
-  </div>
-  <div class="col-sm-6">
-    <div class='row'>
-      <div class='col-sm-12' id='graph-clubs'></div>
-    </div>
-  </div>
-  <div class="col-sm-2 right">
-    <h1>?</h1>
-  </div>
-</div>
-
-<hr>
-
-{{#if authorized}}
-
-<div class="row">
-  <div class="col-sm-4">
-    <h3>Post latest numbers:</h3>
-    <p>Until automated systems and databases are ready, these numbers are updated manually.</p>
-    <form class="form-horizontal well" method="get" action="/dashboard/learning-networks/submit">
-      <div class="form-group">
-        <label for="inputCities" class="col-sm-5 control-label">Cities</label>
-        <div class="col-sm-7">
-          <input type="number" class="form-control" id="inputCities" name="inputCities" placeholder="100">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPeople" class="col-sm-5 control-label">People</label>
-        <div class="col-sm-7">
-          <input type="number" class="form-control" id="inputPeople" name="inputPeople" placeholder="2000">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputHiveCities" class="col-sm-5 control-label">Hive Cities</label>
-        <div class="col-sm-7">
-          <input type="number" class="form-control" id="inputHiveCities" name="inputHiveCities" placeholder="6">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputClubs" class="col-sm-5 control-label">Clubs</label>
-        <div class="col-sm-7">
-          <input type="number" class="form-control" id="inputClubs" name="inputClubs" placeholder="100">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-7">
-          <button type="submit" class="btn btn-default btn-primary">Save latest numbers</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-{{/if}}
 

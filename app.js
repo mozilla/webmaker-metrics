@@ -131,11 +131,7 @@ app.get('/', function (req, res) {
       res.redirect('/dashboards');
     }
   } else {
-    var email = req.session.email;
-    res.render('home', {
-      currentUser: email,
-      authorized: (req.session.authorized)
-    });
+    res.redirect('/dashboards');
   }
 });
 
@@ -381,6 +377,16 @@ app.get('/api/learning-network-hive-cities', function (req, res) {
 
 app.get('/api/learning-network-clubs', function (req, res) {
   reporting.learningNetworkClubs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/mofo-people', function (req, res) {
+  reporting.mofoPeople(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});

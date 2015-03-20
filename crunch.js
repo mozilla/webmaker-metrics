@@ -71,6 +71,28 @@ function emailOptins(callback){
   });
 }
 
+function updateRelationships(callback){
+  webmakerMetrics.updateRelationships(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.updateRelationships()');
+    return callback(null);
+  });
+}
+
+function backdateRelationships(callback){
+  webmakerMetrics.backdateRelationships(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.backdateRelationships()');
+    return callback(null);
+  });
+}
+
 function updateCountry(callback){
   countryData.updateCountryData(function (err, res) {
     'use strict';
@@ -130,6 +152,18 @@ if (opts[0]) {
   if (toRun === 'emailOptins') {
     emailOptins(function (err) {
       console.log('Ran emailOptins');
+    });
+  }
+
+  if (toRun === 'updateRelationships') {
+    updateRelationships(function (err) {
+      console.log('Ran updateRelationships');
+    });
+  }
+
+  if (toRun === 'backdateRelationships') {
+    backdateRelationships(function (err) {
+      console.log('Ran backdateRelationships');
     });
   }
 

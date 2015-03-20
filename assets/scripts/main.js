@@ -113,11 +113,11 @@ var util = {
   },
 
   startOf2015: function () {
-    return new Date(2015,01,01);
+    return new Date(2015,0,01); // month is 0 index
   },
 
   endOf2015: function () {
-    return new Date(2015,12,31);
+    return new Date(2015,11,31); // month is 0 index
   },
 
   formatNumberCell: function (x) {
