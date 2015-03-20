@@ -16,9 +16,9 @@ d3.json('/api/email-optins-1day' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -48,9 +48,9 @@ d3.json('/api/email-optin-1day' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -79,9 +79,9 @@ d3.json('/api/email-optin-30days' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',

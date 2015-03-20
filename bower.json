@@ -12,7 +12,8 @@
     "jquery": "~2.1.1",
     "bootstrap": "~3.2.0",
     "dynatable": "~0.3.1",
-    "makerstrap": "~0.2.7"
+    "makerstrap": "~0.2.7",
+    "metrics-graphics": "~2.2.1"
   },
   "devDependencies": {},
   "resolutions": {

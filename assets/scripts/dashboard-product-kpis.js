@@ -16,9 +16,9 @@ d3.json('/api/product-uvs' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -47,9 +47,9 @@ d3.json('/api/product-uvtoau' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q1'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -79,9 +79,9 @@ d3.json('/api/product-uvtonewuser' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target Q1'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -113,9 +113,9 @@ d3.json('/api/product-retention-7day' + util.cacheKill(), function(data) {
   var baselines = [ {value:goalQ2, label:'target Q2'},
                     {value:goalQ3, label:'target Q3'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -145,9 +145,9 @@ d3.json('/api/product-retention-30day' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = [{value:goal, label:'target Q4'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -176,9 +176,9 @@ d3.json('/api/product-retention-90day' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q4'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -208,9 +208,9 @@ d3.json('/api/product-UVtoEU' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q4'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',
@@ -239,9 +239,9 @@ d3.json('/api/product-AUtoEU' + util.cacheKill(), function(data) {
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
   var baselines = []; //[{value:goal, label:'target Q4'}];
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     interpolate: 'basic',

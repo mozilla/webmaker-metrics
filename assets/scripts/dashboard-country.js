@@ -9,9 +9,9 @@ var torso = {};
 
 d3.json('/api/target-countries' + util.cacheKill(), function(data) {
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     //interpolate: 'basic',

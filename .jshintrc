@@ -11,8 +11,7 @@
     "dynatable":true,
     "util": true,
     "d3": true,
-    "data_graphic": true,
-    "convert_dates": true
+    "MG": true
   },
   "bitwise": true,
   "curly": true,

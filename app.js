@@ -176,6 +176,10 @@ app.get('/dashboard/learning-networks', function (req, res) {
   renderDashboardPage(req, res, 'dashboard-learning-networks');
 });
 
+app.get('/dashboard/mofo-kpis', function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-mofo-kpis');
+});
+
 /** ================================
  * RESTRICTED ROUTES
  ================================ */

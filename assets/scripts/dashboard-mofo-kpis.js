@@ -70,7 +70,7 @@ d3.json('/api/learning-network-people' + util.cacheKill(), function(data) {
     max_y: max_y
   });
   $('#inputPeople').val(mostRecentValue);
-  d3.select('#total-people').html(util.numberWithCommas(mostRecentValue));
+  d3.select('#total-people').html(mostRecentValue);
 });
 
 // Hive Cities
