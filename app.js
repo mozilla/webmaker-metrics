@@ -53,8 +53,6 @@ app.use(function (req, res, next) {
 });
 var ninetyDaysInMilliseconds = 7776000000;
 app.use(helmet.hsts({ maxAge: ninetyDaysInMilliseconds }));  // HTTP Strict Transport Security
-app.use(helmet.xframe('allow-from', 'http://localhost:8080'));
-app.use(helmet.xframe('allow-from', 'http://build.webmaker.org'));
 app.use(helmet.csp(cspPolicy));
 app.use(helmet.xssFilter());
 app.use(helmet.nosniff());
