@@ -33,7 +33,7 @@ var opts = require("nomnom").parse();
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-function appmaker (callback){
+function refreshAppmaker (callback){
   appmaker.refreshStats(function (err) {
     'use strict';
     if (err) {
@@ -71,6 +71,28 @@ function emailOptins(callback){
   });
 }
 
+function updateRelationships(callback){
+  webmakerMetrics.updateRelationships(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.updateRelationships()');
+    return callback(null);
+  });
+}
+
+function backdateRelationships(callback){
+  webmakerMetrics.backdateRelationships(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.backdateRelationships()');
+    return callback(null);
+  });
+}
+
 function updateCountry(callback){
   countryData.updateCountryData(function (err, res) {
     'use strict';
@@ -78,6 +100,28 @@ function updateCountry(callback){
       console.error(err);
     }
     console.log('Finished Running countryData.updateCountryData()');
+    return callback(null);
+  });
+}
+
+function backdateCountry(callback){
+  countryData.backdataCountryData(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running countryData.backdataCountryData()');
+    return callback(null);
+  });
+}
+
+function backdateProduct(callback){
+  webmakerMetrics.updateProductFunnel7Days(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.updateProductFunnel7Days()');
     return callback(null);
   });
 }
@@ -93,9 +137,9 @@ if (opts[0]) {
   var toRun = opts[0];
   console.log('Trying to run method', toRun);
 
-  if (toRun === 'appmaker') {
-    appmaker(function (err) {
-      console.log('Ran appmaker');
+  if (toRun === 'refreshAppmaker') {
+    refreshAppmaker(function (err) {
+      console.log('Ran refreshAppmaker');
     });
   }
 
@@ -111,9 +155,33 @@ if (opts[0]) {
     });
   }
 
+  if (toRun === 'updateRelationships') {
+    updateRelationships(function (err) {
+      console.log('Ran updateRelationships');
+    });
+  }
+
+  if (toRun === 'backdateRelationships') {
+    backdateRelationships(function (err) {
+      console.log('Ran backdateRelationships');
+    });
+  }
+
   if (toRun === 'updateCountry') {
     updateCountry(function (err) {
       console.log('Ran updateCountry');
+    });
+  }
+
+  if (toRun === 'backdateCountry') {
+    backdateCountry(function (err) {
+      console.log('Ran backdateCountry');
+    });
+  }
+
+  if (toRun === 'backdateProduct') {
+    backdateProduct(function (err) {
+      console.log('Ran backdateProduct');
     });
   }
 
@@ -122,7 +190,7 @@ if (opts[0]) {
   // Run the whole suite
 
   async.series({
-    appmaker: appmaker,
+    refreshAppmaker: refreshAppmaker,
     productKPIs: productKPIs,
     emailOptins: emailOptins,
     updateCountry: updateCountry

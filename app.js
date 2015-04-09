@@ -131,11 +131,7 @@ app.get('/', function (req, res) {
       res.redirect('/dashboards');
     }
   } else {
-    var email = req.session.email;
-    res.render('home', {
-      currentUser: email,
-      authorized: (req.session.authorized)
-    });
+    res.redirect('/dashboards');
   }
 });
 
@@ -152,28 +148,40 @@ function renderDashboardPage(req, res, viewName) {
   res.render(viewName, templateValues);
 }
 
-app.get('/dashboards', restrict, function (req, res) {
+/** ================================
+ * PUBLIC ROUTES
+ ================================ */
+
+app.get('/dashboards', function (req, res) {
   renderDashboardPage(req, res, 'dashboards');
 });
 
-app.get('/dashboard/rids', restrict, function (req, res) {
-  renderDashboardPage(req, res, 'dashboard-rids');
-});
-
-app.get('/dashboard/product-kpis', restrict, function (req, res) {
+app.get('/dashboard/product-kpis', function (req, res) {
   renderDashboardPage(req, res, 'dashboard-product-kpis');
 });
 
-app.get('/dashboard/email', restrict, function (req, res) {
+app.get('/dashboard/email', function (req, res) {
   renderDashboardPage(req, res, 'dashboard-email');
 });
 
-app.get('/dashboard/country', restrict, function (req, res) {
+app.get('/dashboard/country', function (req, res) {
   renderDashboardPage(req, res, 'dashboard-country');
 });
 
-app.get('/dashboard/learning-networks', restrict, function (req, res) {
+app.get('/dashboard/learning-networks', function (req, res) {
   renderDashboardPage(req, res, 'dashboard-learning-networks');
+});
+
+app.get('/dashboard/mofo-kpis', function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-mofo-kpis');
+});
+
+/** ================================
+ * RESTRICTED ROUTES
+ ================================ */
+
+app.get('/dashboard/rids', restrict, function (req, res) {
+  renderDashboardPage(req, res, 'dashboard-rids');
 });
 
 app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
@@ -194,9 +202,202 @@ app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
 });
 
 /** ================================
- * APIS (RESTRICTED)
+ * APIS (PUBLIC)
  ================================ */
 
+app.get('/api/country', function (req, res) {
+  reporting.latestCountryData(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/target-countries', function (req, res) {
+  reporting.targetCountries(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvs', function (req, res) {
+  reporting.productUVs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvtonewuser', function (req, res) {
+  reporting.productUVtoNewUser(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvtoau', function (req, res) {
+  reporting.productUVtoAU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retention-7day', function (req, res) {
+  reporting.productRetention7Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retention-30day', function (req, res) {
+  reporting.productRetention30Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retention-90day', function (req, res) {
+  reporting.productRetention90Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-UVtoEU', function (req, res) {
+  reporting.productUVtoEU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-AUtoEU', function (req, res) {
+  reporting.productAUtoEU(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-1day', function (req, res) {
+  reporting.emailOptinRate1day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optins-1day', function (req, res) {
+  reporting.emailOptins1day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-7days', function (req, res) {
+  reporting.emailOptinRate7days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/email-optin-30days', function (req, res) {
+  reporting.emailOptinRate30days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-cities', function (req, res) {
+  reporting.learningNetworkCities(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-people', function (req, res) {
+  reporting.learningNetworkPeople(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-hive-cities', function (req, res) {
+  reporting.learningNetworkHiveCities(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/learning-network-clubs', function (req, res) {
+  reporting.learningNetworkClubs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/mofo-people', function (req, res) {
+  reporting.mofoPeople(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+/** ================================
+ * APIS (RESTRICTED)
+ ================================ */
 app.get('/api/rids', restrict, function (req, res) {
   reporting.latestRIDs(function (err, result) {
     if (err) {
@@ -207,190 +408,8 @@ app.get('/api/rids', restrict, function (req, res) {
   });
 });
 
-app.get('/api/country', restrict, function (req, res) {
-  reporting.latestCountryData(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/target-countries', restrict, function (req, res) {
-  reporting.targetCountries(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-uvs', restrict, function (req, res) {
-  reporting.productUVs(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-uvtonewuser', restrict, function (req, res) {
-  reporting.productUVtoNewUser(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-uvtoau', restrict, function (req, res) {
-  reporting.productUVtoAU(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-retention-7day', restrict, function (req, res) {
-  reporting.productRetention7Day(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-retention-30day', restrict, function (req, res) {
-  reporting.productRetention30Day(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-retention-90day', restrict, function (req, res) {
-  reporting.productRetention90Day(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-UVtoEU', restrict, function (req, res) {
-  reporting.productUVtoEU(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/product-AUtoEU', restrict, function (req, res) {
-  reporting.productAUtoEU(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/email-optin-1day', restrict, function (req, res) {
-  reporting.emailOptinRate1day(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/email-optins-1day', restrict, function (req, res) {
-  reporting.emailOptins1day(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/email-optin-7days', restrict, function (req, res) {
-  reporting.emailOptinRate7days(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/email-optin-30days', restrict, function (req, res) {
-  reporting.emailOptinRate30days(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/learning-network-cities', restrict, function (req, res) {
-  reporting.learningNetworkCities(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/learning-network-people', restrict, function (req, res) {
-  reporting.learningNetworkPeople(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/learning-network-hive-cities', restrict, function (req, res) {
-  reporting.learningNetworkHiveCities(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-app.get('/api/learning-network-clubs', restrict, function (req, res) {
-  reporting.learningNetworkClubs(function (err, result) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({status: 'Internal Server Error'});
-    }
-    res.json(result);
-  });
-});
-
-
-
 /** ================================
- * APIS (PUBLIC)
+ * GECKOBOARD APIs (PUBLIC)
  ================================ */
 
 

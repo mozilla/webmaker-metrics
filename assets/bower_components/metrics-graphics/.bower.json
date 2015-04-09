@@ -1,33 +1,27 @@
 {
   "name": "metrics-graphics",
+  "version": "2.2.1",
   "main": [
-    "js/metricsgraphics.min.js",
-    "css/metricsgraphics.css"
+    "dist/metricsgraphics.js",
+    "dist/metricsgraphics.css"
   ],
   "dependencies": {
     "jquery": ">=1.11.1",
-    "bootstrap": ">=3.1.1",
     "d3": ">=3.4.8"
   },
   "ignore": [
     ".DS_Store",
     ".git",
     ".gitignore",
-    "css/metrics-graphics-demo.css",
-    "css/highlightjs-default.css",
-    "data",
-    "images/divider.png",
-    "images/og-logo.png",
-    "images/logo.svg",
-    "js/main.js",
-    "js/metricsgraphics.js",
-    "js/lib",
+    "examples",
+    "gulp",
+    "gulpfile.js",
+    "index.js",
+    "node_modules",
+    "package.json",
     "src",
-    "make.py",
-    "index.htm",
-    "dev.htm",
-    "examples.htm",
-    "interactive-demo.htm"
+    "testem.json",
+    "tests"
   ],
   "license": "MPL-2.0",
   "authors": [
@@ -48,14 +42,14 @@
     "metricsgraphics.js",
     "d3 charts"
   ],
-  "_release": "0a845b0fd9",
+  "_release": "2.2.1",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "0a845b0fd9b7ecb6bc0dcef6e7b0a602c90d8280"
+    "type": "version",
+    "tag": "v2.2.1",
+    "commit": "38aea5bd77eb15a2f3e53acc1b0af1aac428fa81"
   },
   "_source": "git://github.com/mozilla/metrics-graphics.git",
-  "_target": "*",
+  "_target": "~2.2.1",
   "_originalSource": "metrics-graphics",
   "_direct": true
 }

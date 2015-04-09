@@ -7,11 +7,11 @@ var torso = {};
     torso.height = 200;
     torso.right = 20;
 
-d3.json('/api/target-countries', function(data) {
+d3.json('/api/target-countries' + util.cacheKill(), function(data) {
 
-  data = convert_dates(data, 'date');
+  data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
-  data_graphic({
+  MG.data_graphic({
     title: null,
     data: data,
     //interpolate: 'basic',
@@ -35,17 +35,6 @@ d3.json('/api/target-countries', function(data) {
 /*
  TABLE
  */
-
-function formatNumberCell(x) {
-  // add comma for thousand seperator
-  x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return '<span class="pull-right">' + x + '</span>';
-}
-
-function formatPercentCell(x) {
-  x = x * 100;
-  return '%' + x.toFixed(3);
-}
 
 function formatCountry(x) {
   if (x === 'Total') {
@@ -72,7 +61,7 @@ var mytable;
 
 // Populate the table
 $.ajax({
-  url: '/api/country',
+  url: '/api/country' + util.cacheKill(),
   success: function(data){
     // link up the table
     mytable = $('#country-table').dynatable({
@@ -93,13 +82,13 @@ $.ajax({
           return formatCountry(record.country);
         },
         'UVsToInternetUsers': function (record) {
-          return formatPercentCell(record.UVsToInternetUsers);
+          return util.numberAsPercent(record.UVsToInternetUsers, 3);
         },
         'UVs30days': function (record) {
-          return formatNumberCell(record.UVs30days);
+          return util.formatNumberCell(record.UVs30days);
         },
         'InternetUsers': function (record) {
-          return formatNumberCell(record.InternetUsers);
+          return util.formatNumberCell(record.InternetUsers);
         }
       }
     }).data(mytable);
