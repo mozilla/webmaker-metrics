@@ -33,7 +33,7 @@ var opts = require("nomnom").parse();
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-function appmaker (callback){
+function refreshAppmaker (callback){
   appmaker.refreshStats(function (err) {
     'use strict';
     if (err) {
@@ -137,9 +137,9 @@ if (opts[0]) {
   var toRun = opts[0];
   console.log('Trying to run method', toRun);
 
-  if (toRun === 'appmaker') {
-    appmaker(function (err) {
-      console.log('Ran appmaker');
+  if (toRun === 'refreshAppmaker') {
+    refreshAppmaker(function (err) {
+      console.log('Ran refreshAppmaker');
     });
   }
 
@@ -190,7 +190,7 @@ if (opts[0]) {
   // Run the whole suite
 
   async.series({
-    appmaker: appmaker,
+    refreshAppmaker: refreshAppmaker,
     productKPIs: productKPIs,
     emailOptins: emailOptins,
     updateCountry: updateCountry
