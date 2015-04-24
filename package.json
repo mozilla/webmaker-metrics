@@ -11,7 +11,7 @@
     "async": "~0.9.0",
     "sequelize": "~2.0.0-rc8",
     "makeapi-client": "~0.5.28",
-    "express-sslify": "~0.1.0",
+    "express-sslify": "~0.1.1",
     "helmet": "~0.4.1",
     "logfmt": "~1.2.0",
     "express-persona": "~0.1.2",

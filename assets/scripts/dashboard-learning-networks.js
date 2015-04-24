@@ -48,7 +48,7 @@ d3.json('/api/learning-network-people' + util.cacheKill(), function(data) {
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = util.getMostRecentValue(data);
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target'}];
+  var baselines = [{value:goal, label:'target Q1'}];
 
   data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
@@ -76,11 +76,12 @@ d3.json('/api/learning-network-people' + util.cacheKill(), function(data) {
 // Hive Cities
 d3.json('/api/learning-network-hive-cities' + util.cacheKill(), function(data) {
 
-  var goal = 10;
+  var goal = 30;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = util.getMostRecentValue(data);
   var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target'}];
+  var baselines = [ {value:goal, label:'target Q3'},
+                    {value:10, label:'target Q1'}];
 
   data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
