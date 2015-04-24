@@ -564,7 +564,6 @@ app.get('/ga/done', auth.connect(basic), function (req, res) {
 var port = Number(process.env.PORT || 5000);
 
 app.configure('production', function () {
-  // production uses Heroku's SSL not our local test certificates
   app.listen(port, function () {
     console.log('Listening on ' + port);
   });
