@@ -1,4 +1,11 @@
-<h1>Webmaker Product KPIs</h1>
+<h1>Webmaker Product KPIs <small>2015</small></h1>
+
+
+<div class="alert alert-info" role="alert">
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+  <span class="sr-only">About:</span>
+  The data shown here relates to the <em>existing</em> Webmaker site and tools, but our 2015 targets are for the <em>new</em> <a href="http://wiki.webmaker.org/Product" target="_blank">Webmaker product</a> which is in development at the time of writing this. For now, these reports show why we are building the new product, rather than how the new product is doing.
+</div>
 
 
 <hr>
@@ -22,7 +29,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>UVs</h4>
-    <p>Unique Visitors, daily average last X days.</p>
+    <p class="definition">Unique Visitors: daily to webmaker.org and related subdomains.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-uvs">loading</h1>
@@ -44,7 +51,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>UV to New User</h4>
-    <p>Conversion Rate: New Users / Unique Visitors</p>
+    <p class="definition">Conversion Rate: The % of Unique Visitors who create a Webmaker Account.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-uvtonewuser">loading</h1>
@@ -65,7 +72,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>7 Day Retention</h4>
-    <p>% of New Users Still Active 7 Days after Account Creation</p>
+    <p class="definition">The % of New Users Still Active 7 Days after Account Creation</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retention-7day">loading</h1>
@@ -87,7 +94,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>30 Day Retention</h4>
-    <p>% of New Users Still Active 30 Days after Account Creation</p>
+    <p class="definition">The % of New Users Still Active 30 Days after Account Creation</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retention-30day">loading</h1>
@@ -112,7 +119,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>90 Day Retention</h4>
-    <p>% of New Users Still Active 90 Days after Account Creation</p>
+    <p class="definition">The % of New Users Still Active 90 Days after Account Creation</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retention-90day">loading</h1>
@@ -132,7 +139,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>UV to AU</h4>
-    <p>Conversion Rate: Active Users / Unique Visitors <small>Includes new and existing users</small></p>
+    <p class="definition">The % of Unique Visitors who become <em>Active Users</em> by creating a new account, or logging into an existing account.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-uvtoau">loading</h1>
@@ -151,15 +158,15 @@
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>UV to EU</h4>
-    <p>Conversion Rate: Enaged Users (making) / Unique Visitors</p>
+    <h4>AU to EU</h4>
+    <p class="definition">Engagement Rate: The % of Active Users who publish a 'Make'.</p>
   </div>
   <div class="col-sm-2 right">
-    <h1 id="total-UVtoEU">loading</h1>
+    <h1 id="total-AUtoEU">loading</h1>
   </div>
   <div class="col-sm-6">
     <div class='row'>
-      <div class='col-sm-12' id='graph-UVtoEU'></div>
+      <div class='col-sm-12' id='graph-AUtoEU'></div>
     </div>
   </div>
   <div class="col-sm-2 right">
@@ -168,18 +175,19 @@
   </div>
 </div>
 
+
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>AU to EU</h4>
-    <p>Engagement Rate: Enaged Users (making) / Active Users</p>
+    <h4>UV to EU</h4>
+    <p class="definition">The % of Unique Visitors who publish a 'Make'.</p>
   </div>
   <div class="col-sm-2 right">
-    <h1 id="total-AUtoEU">loading</h1>
+    <h1 id="total-UVtoEU">loading</h1>
   </div>
   <div class="col-sm-6">
     <div class='row'>
-      <div class='col-sm-12' id='graph-AUtoEU'></div>
+      <div class='col-sm-12' id='graph-UVtoEU'></div>
     </div>
   </div>
   <div class="col-sm-2 right">
