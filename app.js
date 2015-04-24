@@ -34,7 +34,7 @@ app.set('view engine', 'handlebars');
 
 app.use(logfmt.requestLogger());
 app.use(express.favicon());
-app.use(enforce.HTTPS());
+app.use(enforce.HTTPS(true));
 app.use(express.urlencoded());
 app.use(express.cookieParser(process.env.COOKIE_SECRET));
 app.use(express.session({
