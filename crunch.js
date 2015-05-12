@@ -192,6 +192,7 @@ if (opts[0]) {
   async.series({
     refreshAppmaker: refreshAppmaker,
     productKPIs: productKPIs,
+    updateRelationships: updateRelationships,
     emailOptins: emailOptins,
     updateCountry: updateCountry
   },
