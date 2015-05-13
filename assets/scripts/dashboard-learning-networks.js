@@ -41,38 +41,6 @@ d3.json('/api/learning-network-cities' + util.cacheKill(), function(data) {
   //d3.select('#latest-date').text(util.getMostRecentDate(data));
 });
 
-// People
-d3.json('/api/learning-network-people' + util.cacheKill(), function(data) {
-
-  var goal = 4000;
-  var maxValue = d3.max(data, function(d) { return d.value; });
-  var mostRecentValue = util.getMostRecentValue(data);
-  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target Q1'}];
-
-  data = MG.convert.date(data, 'date');
-  //add a line chart that has a few observations
-  MG.data_graphic({
-    title: null,
-    data: data,
-    interpolate: 'basic',
-    full_width: true,
-    height: small.height,
-    right: small.right,
-    target: '#graph-people',
-    x_accessor: 'date',
-    y_accessor: 'value',
-    area: true,
-    x_axis: true,
-    min_x: util.startOf2015(),
-    max_x: util.endOf2015(),
-    baselines: baselines,
-    max_y: max_y
-  });
-  $('#inputPeople').val(mostRecentValue);
-  d3.select('#total-people').html(util.numberWithCommas(mostRecentValue));
-});
-
 // Hive Cities
 d3.json('/api/learning-network-hive-cities' + util.cacheKill(), function(data) {
 
