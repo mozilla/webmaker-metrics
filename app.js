@@ -188,7 +188,7 @@ app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
   var snapshotDate = moment().format('YYYY-MM-DD');
   var snapshot = {
     snapshotDate: snapshotDate,
-    people: req.query.inputPeople,
+    people: 0,
     cities: req.query.inputCities,
     clubs: req.query.inputClubs,
     hiveCities: req.query.inputHiveCities,
