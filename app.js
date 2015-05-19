@@ -225,8 +225,28 @@ app.get('/api/target-countries', function (req, res) {
   });
 });
 
+app.get('/api/product-maus', function (req, res) {
+  reporting.productMAUs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
 app.get('/api/product-uvs', function (req, res) {
   reporting.productUVs(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-newusers', function (req, res) {
+  reporting.productNewUsers(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
@@ -277,6 +297,36 @@ app.get('/api/product-retention-30day', function (req, res) {
 
 app.get('/api/product-retention-90day', function (req, res) {
   reporting.productRetention90Day(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retained-7days', function (req, res) {
+  reporting.productRetained7Days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retained-30days', function (req, res) {
+  reporting.productRetained30Days(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-retained-90days', function (req, res) {
+  reporting.productRetained90Days(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
