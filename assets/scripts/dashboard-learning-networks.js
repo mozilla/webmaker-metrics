@@ -77,11 +77,15 @@ d3.json('/api/learning-network-hive-cities' + util.cacheKill(), function(data) {
 // Clubs
 d3.json('/api/learning-network-clubs' + util.cacheKill(), function(data) {
 
-  var goal = 600;
+  var goalQ2 = 100;
+  var goalQ3 = 300;
+  var goalQ4 = 500;
   var maxValue = d3.max(data, function(d) { return d.value; });
   var mostRecentValue = util.getMostRecentValue(data);
-  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
-  var baselines = [{value:goal, label:'target'}];
+  var max_y = util.yMaxFromDataOrGoal(maxValue, goalQ4);
+  var baselines = [ {value:goalQ2, label:'target Q2'},
+                    {value:goalQ3, label:'target Q3'},
+                    {value:goalQ4, label:'target Q4'}];
 
   data = MG.convert.date(data, 'date');
   //add a line chart that has a few observations
