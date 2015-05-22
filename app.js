@@ -190,7 +190,6 @@ app.get('/dashboard/learning-networks/submit', restrict, function (req, res) {
     snapshotDate: snapshotDate,
     people: 0,
     cities: req.query.inputCities,
-    clubs: req.query.inputClubs,
     hiveCities: req.query.inputHiveCities,
     loggedBy: req.session.email
   };
