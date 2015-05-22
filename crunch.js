@@ -93,6 +93,17 @@ function backdateRelationships(callback){
   });
 }
 
+function updateClubs(callback){
+  webmakerMetrics.updateClubs(function (err, res) {
+    'use strict';
+    if (err) {
+      console.error(err);
+    }
+    console.log('Finished Running webmakerMetrics.updateClubs()');
+    return callback(null);
+  });
+}
+
 function updateCountry(callback){
   countryData.updateCountryData(function (err, res) {
     'use strict';
@@ -167,6 +178,12 @@ if (opts[0]) {
     });
   }
 
+  if (toRun === 'updateClubs') {
+    updateClubs(function (err) {
+      console.log('Ran updateClubs');
+    });
+  }
+
   if (toRun === 'updateCountry') {
     updateCountry(function (err) {
       console.log('Ran updateCountry');
@@ -194,7 +211,8 @@ if (opts[0]) {
     productKPIs: productKPIs,
     updateRelationships: updateRelationships,
     emailOptins: emailOptins,
-    updateCountry: updateCountry
+    updateCountry: updateCountry,
+    updateClubs: updateClubs
   },
   function(err, results) {
       console.log('Finished running crunch.js');
