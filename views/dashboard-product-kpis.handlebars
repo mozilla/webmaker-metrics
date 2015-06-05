@@ -4,7 +4,8 @@
 <div class="alert alert-info" role="alert">
   <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
   <span class="sr-only">About:</span>
-  The data shown here relates to the <em>existing</em> Webmaker site and tools, but our 2015 targets are for the <em>new</em> <a href="http://wiki.webmaker.org/Product" target="_blank">Webmaker product</a> which is in development at the time of writing this. For now, these reports show why we are building the new product, rather than how the new product is doing.
+  As we prepare to launch the new Webmaker app, the data here will be showing a mix of results from new and old tools. Please seen annotations on the graphs for when these changes to reporting were made. Also, trailing measures like MAUs will adjust gragually as the 30 day window can include a mix of old and new data.<br><br>
+  (A) We changed our UV measure to only track webmaker.org (and not the subdomains/tools as we've done until now). We also added a graph to show UVs for the Mobile App.
 </div>
 
 
@@ -49,30 +50,9 @@
 <hr>
 <div class="row">
   <div class="col-sm-2">
-    <h4>UVs</h4>
-    <p class="definition">Unique Visitors: daily to webmaker.org and related subdomains.</p>
-  </div>
-  <div class="col-sm-2 right">
-    <h1 id="total-uvs">loading</h1>
-  </div>
-  <div class="col-sm-6">
-    <div class='row'>
-      <div class='col-sm-12' id='graph-uvs'></div>
-    </div>
-  </div>
-  <div class="col-sm-2 right">
-    <p class="visible-sm visible-xs">Target</p>
-    <h1>19,750</h1>
-    <p>End of Q4</p>
-    <p>(600k monthly)</p>
-  </div>
-</div>
-
-<hr>
-<div class="row">
-  <div class="col-sm-2">
     <h4>UV to New User</h4>
-    <p class="definition">Conversion Rate: The % of Unique Visitors who create a Webmaker Account.</p>
+    <p class="definition">New Webmaker Accounts / UVs to webmaker.org
+    <br><br>Known issue: For now, this includes accounts for old webmaker tools and doesn't include UVs to play store)</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-uvtonewuser">loading</h1>
@@ -86,6 +66,29 @@
     <p class="visible-sm visible-xs">Target</p>
     <h1>5%</h1>
     <p>End of Q1</p>
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-sm-2">
+    <h4>Web UVs</h4>
+    <p class="definition">Unique Visitors: daily to webmaker.org
+    <br><br>Note: Previously included traffic to old webmaker tools.</p>
+  </div>
+  <div class="col-sm-2 right">
+    <h1 id="total-uvs-web">loading</h1>
+  </div>
+  <div class="col-sm-6">
+    <div class='row'>
+      <div class='col-sm-12' id='graph-uvs-web'></div>
+    </div>
+  </div>
+  <div class="col-sm-2 right">
+    <p class="visible-sm visible-xs">Target</p>
+    <h1>19,750</h1>
+    <p>End of Q4</p>
+    <p>(600k monthly)</p>
   </div>
 </div>
 
@@ -103,6 +106,28 @@
     </div>
   </div>
   <div class="col-sm-2 right">
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-sm-2">
+    <h4>App UVs</h4>
+    <p class="definition">Unique Visitors: daily to Mobile App</p>
+  </div>
+  <div class="col-sm-2 right">
+    <h1 id="total-uvs-app">loading</h1>
+  </div>
+  <div class="col-sm-6">
+    <div class='row'>
+      <div class='col-sm-12' id='graph-uvs-app'></div>
+    </div>
+  </div>
+  <div class="col-sm-2 right">
+    <p class="visible-sm visible-xs">Target</p>
+    <h1>19,750</h1>
+    <p>End of Q4</p>
+    <p>(600k monthly)</p>
   </div>
 </div>
 
@@ -132,7 +157,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>7 Day Retained</h4>
-    <p class="definition">Looking at the period between 7 and 14 days prior, how many new users for an average day are still Active 7 Days after Account Creation.</p>
+    <p class="definition">Looking at the period between 7 and 14 days prior, the number of new users for an average day who are still Active 7 Days after Account Creation.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retained-7day">loading</h1>
@@ -171,7 +196,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>30 Day Retained</h4>
-    <p class="definition">Looking at the period between 30 and 37 days prior, how many new users for an average day are still Active 30 Days after Account Creation.</p>
+    <p class="definition">Looking at the period between 30 and 37 days prior, the number of new users for an average day who are still Active 30 Days after Account Creation.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retained-30day">loading</h1>
@@ -212,7 +237,7 @@
 <div class="row">
   <div class="col-sm-2">
     <h4>90 Day Retained</h4>
-    <p class="definition">Looking at the period between 90 and 97 days prior, how many new users for an average day are still Active 90 Days after Account Creation.</p>
+    <p class="definition">Looking at the period between 90 and 97 days prior, the number of new users for an average day who are still Active 90 Days after Account Creation.</p>
   </div>
   <div class="col-sm-2 right">
     <h1 id="total-retained-90day">loading</h1>

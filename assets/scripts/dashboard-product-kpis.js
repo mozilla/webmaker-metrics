@@ -5,10 +5,15 @@ var small = {};
     small.right = 20;
     small.top = 20;
 
+// vertical markers with important dates
+var markers = [{
+  'date': new Date('2015-06-03T00:00:00.000Z'),
+  'label': 'A'
+}];
 
 
-// UVs
-d3.json('/api/product-uvs' + util.cacheKill(), function(data) {
+// UVs Web
+d3.json('/api/product-uvs-web' + util.cacheKill(), function(data) {
 
   var goal = 19750;
   var maxValue = d3.max(data, function(d) { return d.value; });
@@ -25,18 +30,51 @@ d3.json('/api/product-uvs' + util.cacheKill(), function(data) {
     full_width: true,
     height: small.height,
     right: small.right,
-    target: '#graph-uvs',
+    target: '#graph-uvs-web',
     x_accessor: 'date',
     y_accessor: 'value',
     area: true,
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
-  d3.select('#total-uvs').html(util.numberWithCommas(mostRecentValue));
+  d3.select('#total-uvs-web').html(util.numberWithCommas(mostRecentValue));
   d3.select('#latest-date').text(util.getMostRecentDate(data));
+});
+
+// UVs App
+d3.json('/api/product-uvs-app' + util.cacheKill(), function(data) {
+
+  var goal = 0;
+  var maxValue = d3.max(data, function(d) { return d.value; });
+  var mostRecentValue = util.getMostRecentValue(data);
+  var max_y = util.yMaxFromDataOrGoal(maxValue, goal);
+  var baselines = []; //[{value:goal, label:'target'}];
+
+  data = MG.convert.date(data, 'date');
+  //add a line chart that has a few observations
+  MG.data_graphic({
+    title: null,
+    data: data,
+    interpolate: 'basic',
+    full_width: true,
+    height: small.height,
+    right: small.right,
+    target: '#graph-uvs-app',
+    x_accessor: 'date',
+    y_accessor: 'value',
+    area: true,
+    x_axis: false,
+    baselines: baselines,
+    max_y: max_y,
+    linked: true,
+    markers: markers
+  });
+
+  d3.select('#total-uvs-app').html(util.numberWithCommas(mostRecentValue));
 });
 
 // New Users
@@ -64,7 +102,8 @@ d3.json('/api/product-newusers' + util.cacheKill(), function(data) {
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-newusers').html(util.numberWithCommas(mostRecentValue));
@@ -96,7 +135,8 @@ d3.json('/api/product-uvtoau' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-uvtoau').html(util.numberAsPercent(mostRecentValue));
@@ -129,7 +169,8 @@ d3.json('/api/product-uvtonewuser' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-uvtonewuser').html(util.numberAsPercent(mostRecentValue));
@@ -164,7 +205,8 @@ d3.json('/api/product-retention-7day' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retention-7day').html(util.numberAsPercent(mostRecentValue));
@@ -195,7 +237,8 @@ d3.json('/api/product-retained-7days' + util.cacheKill(), function(data) {
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retained-7day').html(mostRecentValue);
@@ -228,7 +271,8 @@ d3.json('/api/product-retention-30day' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retention-30day').html(util.numberAsPercent(mostRecentValue));
@@ -259,7 +303,8 @@ d3.json('/api/product-retained-30days' + util.cacheKill(), function(data) {
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retained-30day').html(mostRecentValue);
@@ -291,7 +336,8 @@ d3.json('/api/product-retention-90day' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retention-90day').html(util.numberAsPercent(mostRecentValue));
@@ -322,7 +368,8 @@ d3.json('/api/product-retained-90days' + util.cacheKill(), function(data) {
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-retained-90day').html(mostRecentValue);
@@ -355,7 +402,8 @@ d3.json('/api/product-UVtoEU' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-UVtoEU').html(util.numberAsPercent(mostRecentValue));
@@ -387,7 +435,8 @@ d3.json('/api/product-AUtoEU' + util.cacheKill(), function(data) {
     baselines: baselines,
     format: 'Percentage',
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
 
   d3.select('#total-AUtoEU').html(util.numberAsPercent(mostRecentValue));
@@ -418,7 +467,8 @@ d3.json('/api/product-maus' + util.cacheKill(), function(data) {
     x_axis: false,
     baselines: baselines,
     max_y: max_y,
-    linked: true
+    linked: true,
+    markers: markers
   });
   d3.select('#total-maus').html(util.numberWithCommas(mostRecentValue));
 });

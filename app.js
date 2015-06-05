@@ -234,8 +234,18 @@ app.get('/api/product-maus', function (req, res) {
   });
 });
 
-app.get('/api/product-uvs', function (req, res) {
-  reporting.productUVs(function (err, result) {
+app.get('/api/product-uvs-web', function (req, res) {
+  reporting.productUVsWeb(function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({status: 'Internal Server Error'});
+    }
+    res.json(result);
+  });
+});
+
+app.get('/api/product-uvs-app', function (req, res) {
+  reporting.productUVsApp(function (err, result) {
     if (err) {
       console.error(err);
       return res.status(500).json({status: 'Internal Server Error'});
